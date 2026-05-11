@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Duběnka – dětská skupina</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Nunito:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --oak: #5C4A2A;
+    --moss: #6B7C4A;
+    --sage: #8FA068;
+    --cream: #F7F3E9;
+    --warm: #E8DFC8;
+    --mushroom: #C4956A;
+    --sky: #9DB5C2;
+    --blush: #D4917A;
+    --dark: #2E2A1F;
+    --text: #3D3628;
+    --muted: #7A7062;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Nunito', sans-serif; background: var(--cream); color: var(--text); overflow-x: hidden; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    background: rgba(247,243,233,0.95); backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(92,74,42,0.12);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.75rem 2.5rem;
+  }
+  .nav-logo { display: flex; align-items: center; gap: 0.5rem; }
+  .nav-logo-text { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--oak); letter-spacing: -0.02em; }
+  .nav-logo-sub { font-size: 0.7rem; color: var(--muted); font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--muted); font-size: 0.88rem; font-weight: 500; letter-spacing: 0.03em; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--oak); }
+  .nav-cta { background: var(--moss); color: white; padding: 0.55rem 1.2rem; border-radius: 2rem; font-size: 0.85rem; font-weight: 600; text-decoration: none; transition: background 0.2s; }
+  .nav-cta:hover { background: var(--oak); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(160deg, #EEE8D5 0%, #E5DCC8 40%, #D8CFB8 100%);
+    display: flex; align-items: center;
+    padding: 6rem 2.5rem 4rem;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: 0; right: 0;
+    width: 55%; height: 100%;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 800'%3E%3Cellipse cx='400' cy='200' rx='220' ry='180' fill='%236B7C4A' opacity='0.08'/%3E%3Cellipse cx='500' cy='500' rx='160' ry='200' fill='%235C4A2A' opacity='0.06'/%3E%3Ccircle cx='320' cy='600' rx='100' fill='%23C4956A' opacity='0.07'/%3E%3C/svg%3E") center/cover no-repeat;
+  }
+  .hero-content { max-width: 560px; position: relative; z-index: 2; }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(107,124,74,0.15); color: var(--moss);
+    padding: 0.35rem 1rem; border-radius: 2rem;
+    font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 7vw, 5rem);
+    line-height: 1.05; color: var(--oak);
+    margin-bottom: 0.5rem;
+  }
+  .hero-title em { font-style: italic; color: var(--moss); }
+  .hero-sub {
+    font-size: 1.1rem; color: var(--muted); font-weight: 300; line-height: 1.7;
+    margin-bottom: 2rem; max-width: 420px;
+  }
+  .hero-sub strong { color: var(--text); font-weight: 600; }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--oak); color: var(--cream);
+    padding: 0.85rem 2rem; border-radius: 2rem;
+    font-size: 0.95rem; font-weight: 600; text-decoration: none;
+    transition: all 0.2s; display: inline-block;
+  }
+  .btn-primary:hover { background: var(--dark); transform: translateY(-1px); }
+  .btn-outline {
+    border: 1.5px solid var(--oak); color: var(--oak);
+    padding: 0.85rem 2rem; border-radius: 2rem;
+    font-size: 0.95rem; font-weight: 600; text-decoration: none;
+    transition: all 0.2s; display: inline-block;
+  }
+  .btn-outline:hover { background: var(--warm); }
+  .hero-stats {
+    display: flex; gap: 2rem; margin-top: 3rem;
+    padding-top: 2rem; border-top: 1px solid rgba(92,74,42,0.15);
+  }
+  .stat-item { text-align: center; }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--oak); display: block; }
+  .stat-label { font-size: 0.78rem; color: var(--muted); font-weight: 500; letter-spacing: 0.05em; }
+
+  /* SECTIONS */
+  section { padding: 5rem 2.5rem; }
+  .section-label { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--mushroom); margin-bottom: 0.75rem; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); color: var(--oak); line-height: 1.2; margin-bottom: 1rem; }
+  .section-body { font-size: 1rem; color: var(--muted); line-height: 1.8; max-width: 560px; }
+
+  /* PHILOSOPHY */
+  .philosophy { background: white; }
+  .philosophy-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .philosophy-pillars { display: grid; gap: 1.5rem; }
+  .pillar {
+    display: flex; gap: 1.2rem; align-items: flex-start;
+    padding: 1.25rem; border-radius: 16px;
+    background: var(--cream); border: 1px solid rgba(92,74,42,0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .pillar:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(92,74,42,0.08); }
+  .pillar-icon {
+    width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+  }
+  .pillar-icon.green { background: #EAF0DC; }
+  .pillar-icon.brown { background: #F0E8D8; }
+  .pillar-icon.blue { background: #DDE8EE; }
+  .pillar-icon.pink { background: #F0E4DF; }
+  .pillar-title { font-weight: 600; font-size: 0.95rem; color: var(--text); margin-bottom: 0.3rem; }
+  .pillar-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+
+  /* ACTIVITIES */
+  .activities { background: var(--cream); }
+  .activities-inner { max-width: 1100px; margin: 0 auto; }
+  .activities-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
+  .activity-card {
+    border-radius: 20px; overflow: hidden;
+    background: white; border: 1px solid rgba(92,74,42,0.08);
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .activity-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(92,74,42,0.12); }
+  .activity-visual {
+    height: 180px; display: flex; align-items: center; justify-content: center;
+    font-size: 4rem; position: relative; overflow: hidden;
+  }
+  .activity-visual.v1 { background: linear-gradient(135deg, #E8F0DC 0%, #D4E8C2 100%); }
+  .activity-visual.v2 { background: linear-gradient(135deg, #F0E8DC 0%, #E8D8C4 100%); }
+  .activity-visual.v3 { background: linear-gradient(135deg, #DCE8F0 0%, #C4D8E8 100%); }
+  .activity-visual.v4 { background: linear-gradient(135deg, #F0DCE8 0%, #E8C4D4 100%); }
+  .activity-visual.v5 { background: linear-gradient(135deg, #E8ECD0 0%, #D8E8B8 100%); }
+  .activity-visual.v6 { background: linear-gradient(135deg, #EDE0D4 0%, #E0CCBC 100%); }
+  .activity-body { padding: 1.25rem 1.5rem 1.5rem; }
+  .activity-tag {
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--mushroom); margin-bottom: 0.4rem; display: block;
+  }
+  .activity-name { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--oak); margin-bottom: 0.5rem; }
+  .activity-text { font-size: 0.85rem; color: var(--muted); line-height: 1.65; }
+
+  /* TEAM */
+  .team { background: #F0EAD8; }
+  .team-inner { max-width: 1100px; margin: 0 auto; }
+  .team-intro { max-width: 580px; margin-bottom: 3.5rem; }
+  .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+  .team-card {
+    background: white; border-radius: 20px;
+    padding: 2rem 1.5rem 1.5rem;
+    text-align: center;
+    border: 1px solid rgba(92,74,42,0.08);
+    transition: transform 0.2s;
+  }
+  .team-card:hover { transform: translateY(-3px); }
+  .team-avatar {
+    width: 80px; height: 80px; border-radius: 50%;
+    margin: 0 auto 1rem;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2rem; border: 3px solid var(--warm);
+  }
+  .team-avatar.t1 { background: #EAF0DC; }
+  .team-avatar.t2 { background: #F0E8DC; }
+  .team-avatar.t3 { background: #DCE8F0; }
+  .team-name { font-family: 'Playfair Display', serif; font-size: 1.15rem; color: var(--oak); margin-bottom: 0.25rem; }
+  .team-role { font-size: 0.78rem; color: var(--mushroom); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.75rem; }
+  .team-bio { font-size: 0.85rem; color: var(--muted); line-height: 1.65; }
+
+  /* EVENT */
+  .event-section { background: var(--oak); color: white; }
+  .event-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .event-badge { background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.9); display: inline-block; padding: 0.35rem 1rem; border-radius: 2rem; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.25rem; }
+  .event-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; line-height: 1.15; margin-bottom: 1rem; }
+  .event-title em { font-style: italic; color: #C4956A; }
+  .event-desc { color: rgba(255,255,255,0.75); font-size: 1rem; line-height: 1.75; margin-bottom: 2rem; }
+  .event-card {
+    background: rgba(255,255,255,0.1); border-radius: 20px;
+    padding: 2rem; border: 1px solid rgba(255,255,255,0.15);
+  }
+  .event-detail { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; }
+  .event-detail:last-child { margin-bottom: 0; }
+  .event-detail-icon { width: 36px; height: 36px; border-radius: 10px; background: rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+  .event-detail-label { font-size: 0.75rem; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.1rem; }
+  .event-detail-val { font-size: 0.95rem; font-weight: 600; }
+  .event-items { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.15); }
+  .event-items-title { font-size: 0.75rem; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem; }
+  .event-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; color: rgba(255,255,255,0.85); margin-bottom: 0.4rem; }
+  .event-item::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--mushroom); flex-shrink: 0; }
+  .event-free { display: inline-block; background: rgba(107,124,74,0.4); border: 1px solid rgba(107,124,74,0.6); color: #B8D48A; padding: 0.3rem 0.8rem; border-radius: 2rem; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 1rem; }
+  .btn-event { display: inline-block; background: var(--cream); color: var(--oak); padding: 0.85rem 2rem; border-radius: 2rem; font-size: 0.95rem; font-weight: 700; text-decoration: none; margin-top: 1.5rem; transition: all 0.2s; }
+  .btn-event:hover { background: white; transform: translateY(-1px); }
+
+  /* INFO */
+  .info-section { background: white; }
+  .info-inner { max-width: 1100px; margin: 0 auto; }
+  .info-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2.5rem; }
+  .info-card { padding: 2rem; border-radius: 20px; border: 1px solid rgba(92,74,42,0.1); background: var(--cream); }
+  .info-icon { font-size: 2rem; margin-bottom: 1rem; }
+  .info-card-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--oak); margin-bottom: 0.75rem; }
+  .info-card-body { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
+  .info-highlight { font-weight: 700; color: var(--moss); font-size: 1.05rem; }
+
+  /* CONTACT */
+  .contact { background: var(--cream); }
+  .contact-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .contact-form { background: white; border-radius: 20px; padding: 2.5rem; border: 1px solid rgba(92,74,42,0.1); }
+  .form-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--oak); margin-bottom: 0.5rem; }
+  .form-subtitle { font-size: 0.88rem; color: var(--muted); margin-bottom: 1.75rem; }
+  .form-row { margin-bottom: 1.2rem; }
+  .form-label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--text); letter-spacing: 0.04em; margin-bottom: 0.4rem; }
+  .form-input {
+    width: 100%; padding: 0.75rem 1rem;
+    border: 1.5px solid rgba(92,74,42,0.15); border-radius: 10px;
+    font-family: 'Nunito', sans-serif; font-size: 0.9rem; color: var(--text);
+    background: var(--cream); outline: none; transition: border-color 0.2s;
+  }
+  .form-input:focus { border-color: var(--moss); }
+  .form-textarea { resize: vertical; min-height: 100px; }
+  .form-submit { width: 100%; background: var(--moss); color: white; border: none; padding: 0.9rem 2rem; border-radius: 2rem; font-family: 'Nunito', sans-serif; font-size: 0.95rem; font-weight: 700; cursor: pointer; transition: background 0.2s; letter-spacing: 0.02em; }
+  .form-submit:hover { background: var(--oak); }
+  .contact-info { padding: 1rem 0; }
+  .contact-info-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--oak); margin-bottom: 0.75rem; }
+  .contact-info-lead { font-size: 1rem; color: var(--muted); line-height: 1.75; margin-bottom: 2rem; }
+  .contact-detail { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem; }
+  .contact-detail-icon { width: 44px; height: 44px; border-radius: 12px; background: var(--warm); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+  .contact-detail-text { font-size: 0.9rem; color: var(--text); font-weight: 500; }
+  .contact-detail-sub { font-size: 0.8rem; color: var(--muted); }
+  .social-links { display: flex; gap: 0.75rem; margin-top: 2rem; }
+  .social-btn { display: flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1.2rem; border-radius: 2rem; border: 1.5px solid rgba(92,74,42,0.2); font-size: 0.85rem; font-weight: 600; color: var(--text); text-decoration: none; transition: all 0.2s; }
+  .social-btn:hover { background: var(--warm); border-color: var(--oak); }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark); color: rgba(255,255,255,0.6);
+    padding: 2.5rem; text-align: center; font-size: 0.85rem;
+  }
+  footer strong { color: rgba(255,255,255,0.9); font-weight: 600; }
+
+  @media (max-width: 768px) {
+    .philosophy-inner, .event-inner, .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .activities-grid, .team-grid, .info-cards { grid-template-columns: 1fr; }
+    nav { padding: 0.75rem 1.25rem; }
+    .nav-links { display: none; }
+    section { padding: 3rem 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <div>
+      <div class="nav-logo-text">Duběnka</div>
+      <div class="nav-logo-sub">dětská skupina</div>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#o-nas">O nás</a></li>
+    <li><a href="#aktivity">Aktivity</a></li>
+    <li><a href="#akce">Akce</a></li>
+    <li><a href="#info">Informace</a></li>
+    <li><a href="#kontakt">Kontakt</a></li>
+  </ul>
+  <a href="#kontakt" class="nav-cta">Přihlásit se</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">🌿 Dětská skupina · Osek u Rokycan</div>
+    <h1 class="hero-title">Místo, kde děti<br><em>mají čas</em><br>být dětmi</h1>
+    <p class="hero-sub">Vítejte v <strong>Duběnce</strong> – místě s duší přírody. Hrajeme si, tvoříme, objevujeme svět a rosteme společně.</p>
+    <div class="hero-actions">
+      <a href="#kontakt" class="btn-primary">Přihlásit dítě</a>
+      <a href="#o-nas" class="btn-outline">Více o nás</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-num">2–6</span>
+        <span class="stat-label">věk dětí</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">3</span>
+        <span class="stat-label">pedagožky</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">♾</span>
+        <span class="stat-label">zážitků</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="philosophy" id="o-nas">
+  <div class="philosophy-inner">
+    <div>
+      <p class="section-label">Naše filozofie</p>
+      <h2 class="section-title">Příroda je<br>nejlepší učitelka</h2>
+      <p class="section-body">Jsme tři obyčejné neobyčejné ženy – kamarádky, pedagožky, maminky, milovnice přírody. Spojily jsme se a vytvořily malý tým plný srdce – srdce Duběnky.</p>
+      <p class="section-body" style="margin-top: 1rem;">Přijďte s námi objevovat svět skrz hru, přírodu a kreativitu. Rodiče jsou pro nás rovnocennými partnery – zakládáme si na otevřené komunikaci, důvěře a sdílení každodenních radostí.</p>
+    </div>
+    <div class="philosophy-pillars">
+      <div class="pillar">
+        <div class="pillar-icon green">🌳</div>
+        <div>
+          <div class="pillar-title">Odvaha objevovat</div>
+          <div class="pillar-desc">Měníme obavy z neznámého v odvahu. Děti se učí vnímat přírodu, rozpoznávat barvy, tvary i vůně.</div>
+        </div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon brown">🐞</div>
+        <div>
+          <div class="pillar-title">Hra a radost</div>
+          <div class="pillar-desc">Objevování světa hrou. Pozorujeme koloběh přírody a „měníme bláto ve vzpomínky".</div>
+        </div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon blue">🐌</div>
+        <div>
+          <div class="pillar-title">Bez spěchu</div>
+          <div class="pillar-desc">Místo, kde si vážíme maličkostí. Svačina je venku s kamarády, spinkání ve stínu zahrady.</div>
+        </div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon pink">🤝</div>
+        <div>
+          <div class="pillar-title">Rodiče jako partneři</div>
+          <div class="pillar-desc">Otevřená komunikace, důvěra a sdílení každodenních radostí i pokroků vašeho dítěte.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="activities" id="aktivity">
+  <div class="activities-inner">
+    <p class="section-label">Co děláme</p>
+    <h2 class="section-title">Smysluplné zážitky<br>každý den</h2>
+    <div class="activities-grid">
+      <div class="activity-card">
+        <div class="activity-visual v1">🌸</div>
+        <div class="activity-body">
+          <span class="activity-tag">příroda</span>
+          <div class="activity-name">Hledání jarních kytiček</div>
+          <p class="activity-text">Vydejte se s dětmi ven a nechte je objevovat kouzlo jara. Děti rozvíjejí zvídavost, trpělivost i jemnou motoriku. Nejde o množství, ale o zážitek.</p>
+        </div>
+      </div>
+      <div class="activity-card">
+        <div class="activity-visual v2">🪀</div>
+        <div class="activity-body">
+          <span class="activity-tag">motorika</span>
+          <div class="activity-name">Modelína a tvoření</div>
+          <p class="activity-text">Na první pohled jen hra – ve skutečnosti velký krok ve vývoji. Posiluje jemnou motoriku, fantazii a dává prostor emocím. Nejde o výsledek, ale o proces.</p>
+        </div>
+      </div>
+      <div class="activity-card">
+        <div class="activity-visual v3">🎨</div>
+        <div class="activity-body">
+          <span class="activity-tag">kreativita</span>
+          <div class="activity-name">Smyslohraní</div>
+          <p class="activity-text">Barevná rýže a těstoviny, senzorické pomůcky, senzomotorické aktivity a domácí modelína. Zážitek pro všechny smysly.</p>
+        </div>
+      </div>
+      <div class="activity-card">
+        <div class="activity-visual v4">🤗</div>
+        <div class="activity-body">
+          <span class="activity-tag">emoce</span>
+          <div class="activity-name">Objetí a bezpečí</div>
+          <p class="activity-text">Objetí dává dětem pocit bezpečí, jistoty a přijetí. Pomáhá zvládat emoce a posiluje sebevědomí. Právě v objetí děti rostou.</p>
+        </div>
+      </div>
+      <div class="activity-card">
+        <div class="activity-visual v5">📚</div>
+        <div class="activity-body">
+          <span class="activity-tag">vzdělávání</span>
+          <div class="activity-name">Hravé listy</div>
+          <p class="activity-text">Edukační aktivity hravou formou. Děti se učí přirozeně, zábavně a v jejich vlastním tempu, bez tlaku a hodnocení.</p>
+        </div>
+      </div>
+      <div class="activity-card">
+        <div class="activity-visual v6">😴</div>
+        <div class="activity-body">
+          <span class="activity-tag">odpočinek</span>
+          <div class="activity-name">Spinkání venku</div>
+          <p class="activity-text">Odpočívat se dá i ve stínu zahrady. Venkovní prostředí zklidňuje, přináší čerstvý vzduch a přirozený rytmus dne.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="team" id="tym">
+  <div class="team-inner">
+    <div class="team-intro">
+      <p class="section-label">Náš tým</p>
+      <h2 class="section-title">Tři neobyčejné<br>obyčejné ženy</h2>
+      <p class="section-body">Pedagožky, maminky, kutilky plné nápadů a nadšenkyně pro dětskou radost. Každá přináší něco svého – dohromady tvoříme srdce Duběnky.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-avatar t1">🌿</div>
+        <div class="team-name">Pavlína Škulinová</div>
+        <div class="team-role">Zakladatelka & pedagožka</div>
+        <p class="team-bio">Milovnice přírody, maminka a tvůrkyně smysluplných zážitků. Kontakt: 725 307 885</p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar t2">🍄</div>
+        <div class="team-name">Naše pedagožka</div>
+        <div class="team-role">Pedagožka</div>
+        <p class="team-bio">Kutilka plná nápadů a nadšenkyně pro dětskou radost a kreativní tvoření s přírodními materiály.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar t3">🌼</div>
+        <div class="team-name">Naše pedagožka</div>
+        <div class="team-role">Pedagožka</div>
+        <p class="team-bio">Kamarádka, průvodkyně dětského světa a zastánkyně pomalého, smysluplného rytmu každého dne.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="event-section" id="akce">
+  <div class="event-inner">
+    <div>
+      <div class="event-badge">Nadcházející akce</div>
+      <h2 class="event-title">Duběnka vás zve na<br><em>Smyslohraní</em></h2>
+      <p class="event-desc">Přijďte zažít odpoledne plné smyslových zážitků pro vaše děti. Barevné materiály, tvoření, zkoumání – a vše zdarma!</p>
+      <a href="tel:725307885" class="btn-event">Rezervovat místo</a>
+    </div>
+    <div class="event-card">
+      <div class="event-detail">
+        <div class="event-detail-icon">📅</div>
+        <div>
+          <div class="event-detail-label">Datum</div>
+          <div class="event-detail-val">Sobota 9. 5. 2026</div>
+        </div>
+      </div>
+      <div class="event-detail">
+        <div class="event-detail-icon">🕒</div>
+        <div>
+          <div class="event-detail-label">Čas</div>
+          <div class="event-detail-val">od 15:00</div>
+        </div>
+      </div>
+      <div class="event-detail">
+        <div class="event-detail-icon">📍</div>
+        <div>
+          <div class="event-detail-label">Místo</div>
+          <div class="event-detail-val">Osek 365, 338 21</div>
+        </div>
+      </div>
+      <div class="event-items">
+        <div class="event-items-title">Co nás čeká</div>
+        <div class="event-item">Barevná rýže a těstoviny</div>
+        <div class="event-item">Senzorické a senzomotorické pomůcky</div>
+        <div class="event-item">Domácí modelína</div>
+        <div class="event-item">Edukační aktivity – Hravé listy</div>
+      </div>
+      <div class="event-free">Vstup zdarma</div>
+    </div>
+  </div>
+</section>
+
+<section class="info-section" id="info">
+  <div class="info-inner">
+    <p class="section-label">Praktické informace</p>
+    <h2 class="section-title">Vše, co potřebujete vědět</h2>
+    <div class="info-cards">
+      <div class="info-card">
+        <div class="info-icon">👶</div>
+        <div class="info-card-title">Cílová skupina</div>
+        <p class="info-card-body">Vítáme děti od <span class="info-highlight">2 do 6 let</span>. Každé dítě jde svým tempem a my to respektujeme.</p>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">📍</div>
+        <div class="info-card-title">Kde nás najdete</div>
+        <p class="info-card-body"><span class="info-highlight">Osek u Rokycan</span><br>Osek 365, 338 21<br>Snadno dostupné z Rokycan i okolí.</p>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">📝</div>
+        <div class="info-card-title">Přihlašování</div>
+        <p class="info-card-body">Zápisy probíhají po telefonické domluvě. Zavolejte nebo napište SMS na <span class="info-highlight">725 307 885</span>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="kontakt">
+  <div class="contact-inner">
+    <div class="contact-info">
+      <p class="section-label">Kontakt</p>
+      <h2 class="contact-info-title">Přijďte<br>se podívat</h2>
+      <p class="contact-info-lead">Máte otázky nebo chcete přihlásit dítě? Neváhejte se ozvat. Rádi vás přivítáme v Duběnce a ukážeme vám, co nabízíme.</p>
+      <div class="contact-detail">
+        <div class="contact-detail-icon">📞</div>
+        <div>
+          <div class="contact-detail-text">725 307 885</div>
+          <div class="contact-detail-sub">Pavlína Škulinová – tel. nebo SMS</div>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-icon">📍</div>
+        <div>
+          <div class="contact-detail-text">Osek 365, 338 21</div>
+          <div class="contact-detail-sub">Osek u Rokycan, Plzeňský kraj</div>
+        </div>
+      </div>
+      <div class="social-links">
+        <a href="https://www.facebook.com/people/D%C4%9Btsk%C3%A1-skupina-Dub%C4%9Bnka/61575535445693/" class="social-btn" target="_blank">📘 Facebook</a>
+        <a href="https://www.instagram.com/dubenka_osek/" class="social-btn" target="_blank">📷 Instagram</a>
+      </div>
+    </div>
+    <div class="contact-form">
+      <div class="form-title">Napište nám</div>
+      <p class="form-subtitle">Ozveme se vám co nejdříve a zodpovíme všechny otázky.</p>
+      <div class="form-row">
+        <label class="form-label">Vaše jméno</label>
+        <input type="text" class="form-input" placeholder="Jana Nováková">
+      </div>
+      <div class="form-row">
+        <label class="form-label">Telefon nebo e-mail</label>
+        <input type="text" class="form-input" placeholder="607 123 456 / jana@email.cz">
+      </div>
+      <div class="form-row">
+        <label class="form-label">Věk dítěte</label>
+        <input type="text" class="form-input" placeholder="např. 3 roky">
+      </div>
+      <div class="form-row">
+        <label class="form-label">Zpráva</label>
+        <textarea class="form-input form-textarea" placeholder="Máte otázky? Napište nám..."></textarea>
+      </div>
+      <button class="form-submit" onclick="this.textContent='✓ Odesláno!';this.style.background='#5C4A2A';setTimeout(()=>{this.textContent='Odeslat zprávu';this.style.background='';},3000)">Odeslat zprávu</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <strong>Duběnka</strong> – dětská skupina · Osek u Rokycan · Tel: 725 307 885<br>
+  <span style="margin-top: 0.5rem; display: block;">© 2026 Duběnka · Místo, kde děti mají čas být dětmi 🌿</span>
+</footer>
+
+<script>
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) t.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
