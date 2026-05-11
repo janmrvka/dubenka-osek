@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dětská skupina Duběnka – Osek u Rokycan</title>
 <meta name="description" content="Dětská skupina Duběnka v Oseku u Rokycan. Péče o děti věku 2–6 let v přírodním prostředí. Hrajeme si, tvoříme a rosteme společně. Přihlaste své dítě!">
+<meta name="robots" content="noindex, nofollow">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Nunito:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -252,12 +253,47 @@
   }
   footer strong { color: rgba(255,255,255,0.9); font-weight: 600; }
 
+  /* Tablet */
+  @media (max-width: 1024px) {
+    .activities-grid, .team-grid { grid-template-columns: repeat(2, 1fr); }
+    .hero-image img { width: 280px; }
+    .hero-image { margin-right: 2rem; }
+  }
+
+  /* Mobile */
   @media (max-width: 768px) {
     .philosophy-inner, .event-inner, .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
     .activities-grid, .team-grid, .info-cards { grid-template-columns: 1fr; }
     nav { padding: 0.75rem 1.25rem; }
     .nav-links { display: none; }
     section { padding: 3rem 1.25rem; }
+
+    .hero {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 5rem 1.25rem 3rem;
+      gap: 2rem;
+    }
+    .hero-image { display: none; }
+    .hero-stats {
+      gap: 0.75rem;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+    }
+    .stat-item { flex: 1; min-width: 0; }
+    .stat-num { font-size: 1.6rem; white-space: nowrap; }
+    .stat-label { font-size: 0.72rem; }
+    .contact-form { padding: 1.75rem; }
+    .event-title { font-size: 2rem; }
+  }
+
+  /* Small phones */
+  @media (max-width: 400px) {
+    .hero-actions { flex-direction: column; }
+    .btn-primary, .btn-outline { text-align: center; }
+    .social-links { flex-direction: column; }
   }
 </style>
 </head>
