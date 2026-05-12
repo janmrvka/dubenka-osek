@@ -246,6 +246,26 @@
   .social-btn { display: flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1.2rem; border-radius: 2rem; border: 1.5px solid rgba(92,74,42,0.2); font-size: 0.85rem; font-weight: 600; color: var(--text); text-decoration: none; transition: all 0.2s; }
   .social-btn:hover { background: var(--warm); border-color: var(--oak); }
 
+  /* REVIEWS */
+  .reviews { background: white; }
+  .reviews-inner { max-width: 1100px; margin: 0 auto; }
+  .reviews-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-top: 3rem; }
+  .review-card {
+    background: var(--cream); border-radius: 20px;
+    padding: 2rem; border: 1px solid rgba(92,74,42,0.1);
+    display: flex; flex-direction: column; gap: 1.25rem;
+  }
+  .review-stars { color: var(--mushroom); font-size: 1.1rem; letter-spacing: 0.1em; }
+  .review-text { font-size: 0.92rem; color: var(--text); line-height: 1.75; flex: 1; }
+  .review-text p { margin-bottom: 0.6rem; }
+  .review-text p:last-child { margin-bottom: 0; }
+  .review-author { display: flex; align-items: center; gap: 0.75rem; padding-top: 1rem; border-top: 1px solid rgba(92,74,42,0.1); }
+  .review-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--warm); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+  .review-name { font-weight: 600; font-size: 0.9rem; color: var(--oak); }
+  @media (max-width: 768px) {
+    .reviews-grid { grid-template-columns: 1fr; }
+  }
+
   /* FOOTER */
   footer {
     background: var(--dark); color: rgba(255,255,255,0.6);
@@ -584,6 +604,40 @@
         <textarea class="form-input form-textarea" placeholder="Máte otázky? Napište nám..."></textarea>
       </div>
       <button class="form-submit" onclick="this.textContent='✓ Odesláno!';this.style.background='#5C4A2A';setTimeout(()=>{this.textContent='Odeslat zprávu';this.style.background='';},3000)">Odeslat zprávu</button>
+    </div>
+  </div>
+</section>
+
+<section class="reviews">
+  <div class="reviews-inner">
+    <p class="section-label">Co říkají rodiče</p>
+    <h2 class="section-title">Jejich slova nás<br>zahřívají u srdce</h2>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">
+          <p>Ráda bych touto cestou vyjádřila obrovské poděkování a podporu paní učitelce Pavlínce. ❤️ Najít v dnešní době pro své dítě někoho, komu můžete plně důvěřovat a kdo do své práce dává celé srdce, je dar.</p>
+          <p><strong>Laskavost a úsměv:</strong> Pavlínka je neuvěřitelně hodná a srdečná. Každé ráno vítá děti i rodiče s upřímným úsměvem, který dokáže rozehnat i ty největší ranní mráčky.</p>
+          <p><strong>Průvodkyně životem:</strong> Oceňuji, že děti neučí jen barvy a tvary, ale učí je „životu". Rozvíjí v nich empatii, slušnost a schopnost poradit si v běžných situacích.</p>
+          <p><strong>Láska k přírodě:</strong> Je úžasné sledovat, jak v dětech probouzí zájem o svět kolem nás. Díky ní vědí, jak voní les, proč je důležité chránit broučky a co se děje s přírodou během roku.</p>
+          <p>Pavlínka není jen paní učitelka, je to člověk na svém místě, který svou profesi vnímá jako poslání. Jsme moc vděční, že právě ona doprovázela naše děti v jejich prvních důležitých krůčcích.</p>
+        </div>
+        <div class="review-author">
+          <div class="review-avatar">🌸</div>
+          <div class="review-name">Barbora Kurýlová</div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">
+          <p>Pavlínku můžu jedině doporučit. Syn s ní strávil ve školce dva úžasné roky. Tolik promyšlených projektů, výletů a aktivit. Zároveň úžasná podpora, empatie, budování vztahů mezi dětmi a v neposlední řadě láska a upřímné nadšení, které vkládá do každého dne a do každého projektu.</p>
+          <p>Nevěřila bych, že odchod ze školky obrečíme, ale loučení s Pavlínkou bylo opravdu emotivní a smutné, protože byla každodenní jistotou nejen pro syna, ale i pro mě. ❤️</p>
+        </div>
+        <div class="review-author">
+          <div class="review-avatar">🌼</div>
+          <div class="review-name">Jana Kubíková</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
